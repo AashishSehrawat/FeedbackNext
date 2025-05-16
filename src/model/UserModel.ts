@@ -70,8 +70,7 @@ const UserSchema: Schema<User> = new Schema({
 });
 
 // If data model is already creted in mongodb then use that and if not than create the data model
-const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("UserModel", UserSchema);
-const MessageModel = mongoose.model("MessageModel", MessageSchema);
+const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("User", UserSchema);
 
 export default UserModel
 

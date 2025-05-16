@@ -34,7 +34,7 @@ export async function POST(req: Request) {
                 message: "Username is alredy existed with this email"
                 }, {status: 400})
             } else {
-                // iser is existoed and not verified
+                // user is existoed and not verified
                 const hashedPassword = await bcrypt.hash(password, 10);
 
                 existingUserByEmail.password = hashedPassword;
@@ -64,7 +64,7 @@ export async function POST(req: Request) {
         }
 
         // send the verification email
-        const emailResponse = await sendVerificationEmail(username, email, Number(verifyCode));
+        const emailResponse = await sendVerificationEmail(username, email, verifyCode) ;
 
         if(!emailResponse.success) {
             return Response.json({
@@ -76,9 +76,6 @@ export async function POST(req: Request) {
             success: true,
             message: "User register successful. please verify your email"
         }, {status: 200})
-
-
-
 
     } catch (error) {
         console.log("Error in registering user", error);

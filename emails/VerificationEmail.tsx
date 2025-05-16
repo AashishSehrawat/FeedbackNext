@@ -1,7 +1,6 @@
 import {
     Html,
     Head,
-    Font,
     Preview,
     Heading,
     Row,
@@ -11,7 +10,7 @@ import {
 
 interface verificationEmailProps {
     username: string,
-    otp: number,
+    otp: string,
 }
 
 export default function VerificationEmail({username, otp}: verificationEmailProps) {
