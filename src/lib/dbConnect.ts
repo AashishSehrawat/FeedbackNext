@@ -5,7 +5,6 @@ type ConnectionObject = {
 }
 
 const connection: ConnectionObject = {}
-const DbName = "feedbackNextJs"
 
 async function dbConnect(): Promise<void> {
     if(connection.isConnected) {
