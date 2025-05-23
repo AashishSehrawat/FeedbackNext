@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
             id: "credentials",
             name: "Credentials",
             credentials: {
-                email: { label: "Email", type: "text", placeholder: "Enter your email" },
+                identifier: { label: "Email", type: "text", placeholder: "Enter your email" },
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials: any, req): Promise<any> {
@@ -18,19 +18,20 @@ export const authOptions: NextAuthOptions = {
                 try {
                     const user = await UserModel.findOne({
                         $or: [
-                            {email: credentials.identifier.email}, 
-                            {username: credentials.identifier.username}
+                            {email: credentials.identifier}, 
+                            {username: credentials.identifier}
                         ]
                     });
+                    console.log("helloo", user)
 
-                    if(!user) {
+                    if(!user) { 
                         throw new Error("No user found with this email");
                     }
 
                     if(!user.isVerified) {
                         throw new Error("Please verify your account before login");
                     }
-
+                    
                     // here to get password only credentials.password is used where as above credentials.identiifer.password is used
                     const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password)
                     if(isPasswordCorrect) {

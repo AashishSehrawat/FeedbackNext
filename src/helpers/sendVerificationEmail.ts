@@ -8,6 +8,8 @@ export async function sendVerificationEmail(
     verifyCode: string,
 ): Promise<ApiResponse> {
     try {
+        console.log("Attempting to send email to:", email);
+
         await resend.emails.send({
         from: 'Acme <onboarding@resend.dev>',
         to: email,
